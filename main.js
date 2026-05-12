@@ -54,7 +54,7 @@ d3.csv("climate_warming_d3.csv", d3.autoType).then(data => {
 
   const line = d3.line()
     .x(d => x(d.year))
-    .y(d => y(d.temperature));
+    .y(d => y(d.mean));
 
   const area = d3.area()
     .x(d => x(d.year))
@@ -127,7 +127,7 @@ d3.csv("climate_warming_d3.csv", d3.autoType).then(data => {
               .html(
                 `<strong>${d.scenario.toUpperCase()}</strong><br>
                  Year: ${d.year}<br>
-                 Mean: ${d.temperature.toFixed(2)} °C<br>
+                 Mean: ${d.mean.toFixed(2)} K<br>
                  Range: ${d.low.toFixed(2)}–${d.high.toFixed(2)} °C`
               );
           })
@@ -143,7 +143,7 @@ d3.csv("climate_warming_d3.csv", d3.autoType).then(data => {
         exit => exit.remove()
       )
       .attr("cx", d => x(d.year))
-      .attr("cy", d => y(d.temperature))
+      .attr("cy", d => y(d.mean))
       .attr("fill", d => colors[d.scenario]);
 
     const legend = svg.selectAll(".legend")
